@@ -18,7 +18,7 @@
     <main>
       <section data-l="de">
         <h1>Datenschutzerklärung</h1>
-        <p class="meta">Stand: 7. Oktober 2026 · Gilt für die Website slothie.app und beschreibt zusätzlich die geplante Android-App „Slothie“.</p>
+        <p class="meta">Stand: 7. Oktober 2026 · Gilt für die Website slothie.app und beschreibt den derzeitigen Funktionsumfang der Android-App „Slothie“ (Paketname <code>com.kidscall.app</code>).</p>
 
         <h2>1. Verantwortlicher</h2>
         <address>Thomas Stadlbauer, Winthirstr. 2, 80639 München, Deutschland<br>E-Mail: <a href="mailto:tomster-@gmx.de">tomster-@gmx.de</a></address>
@@ -42,16 +42,20 @@
         <p>Die gewählte Sprache wird nur in der Adresse der Seite (z. B. <code>?lang=en</code>) übergeben und nicht gespeichert. Es werden keine Cookies oder Browser-Speicher (Local Storage) genutzt.</p>
 
         <h2>7. Die Android-App „Slothie“</h2>
-        <p>Die App ist in Entwicklung und noch nicht veröffentlicht. Für die geplante App gilt nach aktuellem Stand:</p>
+        <p>Die App hat kein Benutzerkonto, keinen eigenen App-Server und keine Werbe- oder Analyse-SDKs. Der Anbieter erhält keine Daten aus der App. Die folgenden Verarbeitungen erfolgen auf dem Gerät oder werden durch eine ausdrücklich gewählte Funktion an den jeweils genannten Empfänger übermittelt.</p>
         <ul>
-          <li>Kein Benutzerkonto, kein eigener Server, keine Werbe- oder Analyse-SDKs. Ich erhalte keine Daten aus der App.</li>
-          <li>Kontakte, gespeicherte Ziele, Einstellungen und Zähler für verpasste Anrufe werden ausschließlich lokal im privaten App-Speicher des Geräts gespeichert. Ein optionaler Einstellungs-Code wird nur als gesalzener Hash gespeichert.</li>
-          <li>Berechtigungen (Telefon, SMS, Standort, Benachrichtigungen, Internet) werden nur für die jeweilige, von Ihnen ausgelöste Funktion genutzt und können in Android jederzeit widerrufen werden.</li>
-          <li>Wetterabfragen gehen an Open-Meteo (gerundete Koordinaten und IP-Adresse). Navigation wird an Google Maps übergeben. Für diese Dienste gelten deren eigene Datenschutzbestimmungen.</li>
-          <li>Eine Standortfreigabe per SMS erfolgt nur nach Ihrer ausdrücklichen Aktion; es wird kein Standortverlauf gespeichert.</li>
+          <li><b>Kontakte und Ziele:</b> Namen und Telefonnummern von Kontakten sowie Namen und Adressen gespeicherter Ziele werden nur gespeichert, wenn Sie sie in Slothie eingeben oder über die Android-Kontaktauswahl auswählen. Slothie liest nicht pauschal Ihr gesamtes Adressbuch. Die Angaben werden im privaten App-Speicher dieses Geräts verarbeitet.</li>
+          <li><b>Einstellungen:</b> Sprache, Farbschema, Zustimmungshinweis, ausgewählte Einstellungen, Zähler verpasster Anrufe und eine gegebenenfalls eingerichtete Wiederherstellungsnummer werden lokal gespeichert. Ein optionaler sechsstelliger Einstellungs-Code wird als gesalzener Hash gespeichert; er verschlüsselt keine App-Daten.</li>
+          <li><b>Telefonie:</b> Wenn Sie einen Anruf auslösen, verwendet Slothie die Telefonie-Funktion von Android und das Mobilfunknetz. Der jeweilige Mobilfunkanbieter verarbeitet die für den Anruf erforderlichen Verbindungsdaten. Slothie speichert lokal nur Zähler verpasster Anrufe für gespeicherte Kontakte; die App fordert keine Berechtigung zum Lesen des Anrufverlaufs an.</li>
+          <li><b>SMS:</b> SMS-Funktionen stehen nur zur Verfügung, wenn Sie Slothie als Standard-SMS-App festlegen. Die App verarbeitet SMS-Inhalte, Telefonnummern und Nachrichtenmetadaten für gespeicherte Kontakte und speichert SMS im gemeinsamen Android-SMS-Speicher. Unterstützt werden nur Textnachrichten; MMS, Bilder und Gruppennachrichten werden nicht unterstützt. Bei Eingang einer MMS speichert Slothie lokal einen Hinweis, zeigt aber den MMS-Inhalt nicht an. Wenn Sie MMS benötigen, legen Sie in Android eine andere SMS-App als Standard fest. Der Mobilfunkanbieter verarbeitet SMS bei Versand und Empfang. Eine Standortfreigabe oder ein Wiederherstellungs-Code wird nur nach Ihrer jeweiligen Aktion an die ausgewählten Telefonnummern gesendet; SMS können nach Ihrem Tarif Kosten verursachen.</li>
+          <li><b>Standort und Wetter:</b> Bei einer von Ihnen gestarteten Wetterabfrage übermittelt Slothie Breiten- und Längengrad mit fünf Nachkommastellen an die Open-Meteo-API. Durch die Internetverbindung erhält Open-Meteo außerdem technisch bedingt Ihre IP-Adresse. Namen und Telefonnummern werden dabei nicht übermittelt. Es wird kein Standortverlauf in Slothie gespeichert.</li>
+          <li><b>Navigation:</b> Wenn Sie eine Route oder Suche öffnen, übergibt Slothie das eingegebene bzw. gespeicherte Ziel und die gewählte Fortbewegungsart an Google Maps oder, falls die App nicht verfügbar ist, an einen Browser. Google Maps kann den Gerätestandort nach den dort geltenden Einstellungen und Berechtigungen verarbeiten.</li>
+          <li><b>Benachrichtigungen:</b> Slothie kann allgemeine Hinweise zu Nachrichten und verpassten Anrufen anzeigen. Nachrichtentext und Kontaktdaten werden in der Benachrichtigung nicht als Vorschau angezeigt.</li>
+          <li><b>Speicherdauer und Löschung:</b> Lokal gespeicherte App-Daten bleiben erhalten, bis Sie sie in Slothie ändern oder löschen, die App-Daten in den Android-Einstellungen löschen oder Slothie deinstallieren. SMS liegen getrennt davon im gemeinsamen Android-SMS-Speicher und müssen dort über die SMS-App gelöscht werden; sie werden durch das Deinstallieren von Slothie nicht zwingend entfernt. Eine Wiederherstellung nach Datenlöschung ist nicht möglich.</li>
+          <li><b>Berechtigungen:</b> Telefon-, SMS-, Standort- und Benachrichtigungszugriffe werden nur für die dazugehörigen App-Funktionen verwendet. Berechtigungen können Sie in Android widerrufen; die davon abhängigen Funktionen stehen dann nicht oder nur eingeschränkt zur Verfügung.</li>
           <li>Die App richtet sich an Erwachsene und nicht an Kinder.</li>
         </ul>
-        <p>Vor der Veröffentlichung der App wird diese Erklärung um eine verbindliche, vollständige App-Datenschutzerklärung ergänzt.</p>
+        <p>Da der Anbieter keine App-Daten auf einem eigenen Server erhält, kann er diese lokalen Daten nicht für Sie aus der Ferne auslesen oder löschen. Die Angaben müssen vor einer Veröffentlichung mit dem finalen App-Build, allen eingebundenen Komponenten und den Angaben im Google-Play-Datensicherheitsformular abgeglichen werden.</p>
 
         <h2>8. Ihre Rechte</h2>
         <p>Sie haben nach der DSGVO folgende Rechte: Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3). Zur Ausübung genügt eine E-Mail an die oben genannte Adresse.</p>
@@ -93,16 +97,20 @@
         <p>The selected language is passed only in the page address (e.g. <code>?lang=en</code>) and is not stored. No cookies or browser storage (local storage) are used.</p>
 
         <h2>7. The “Slothie” Android app</h2>
-        <p>The app is under development and not yet released. As currently planned:</p>
+        <p>The app has no user account, no app server of its own, and no advertising or analytics SDKs. The provider does not receive data from the app. The following processing takes place on the device or is transmitted to the named recipient when you explicitly use the corresponding feature.</p>
         <ul>
-          <li>No user account, no server of my own, no advertising or analytics SDKs. I receive no data from the app.</li>
-          <li>Contacts, saved destinations, settings and missed-call counters are stored only locally in the app’s private storage on your device. An optional settings code is stored only as a salted hash.</li>
-          <li>Permissions (phone, SMS, location, notifications, internet) are used only for the respective function you trigger and can be revoked in Android at any time.</li>
-          <li>Weather requests go to Open-Meteo (rounded coordinates and IP address). Navigation is handed over to Google Maps. These services are governed by their own privacy policies.</li>
-          <li>Location sharing by SMS happens only after your explicit action; no location history is stored.</li>
+          <li><b>Contacts and destinations:</b> Names and phone numbers of contacts, and names and addresses of saved destinations, are stored only when you enter them in Slothie or select them using Android’s contact picker. Slothie does not read your entire address book. These details are processed in the app’s private storage on this device.</li>
+          <li><b>Settings:</b> Language, color scheme, acknowledgement of the usage notice, selected settings, missed-call counters, and an optional recovery phone number are stored locally. An optional six-digit settings code is stored as a salted hash; it does not encrypt app data.</li>
+          <li><b>Calls:</b> When you initiate a call, Slothie uses Android’s phone function and the mobile network. Your mobile operator processes the connection data required for the call. Slothie stores only local missed-call counters for saved contacts; it does not request permission to read call history.</li>
+          <li><b>SMS:</b> SMS features are available only while Slothie is set as the default SMS app. The app processes SMS contents, phone numbers, and message metadata for saved contacts and stores SMS in Android’s shared SMS storage. Slothie supports text messages only; MMS, pictures, and group messages are not supported. When an MMS arrives, Slothie stores a local notice but does not display the MMS contents. To use MMS, set another SMS app as the default in Android. Your mobile operator processes SMS sent and received over its network. A location share or recovery code is sent to the selected phone numbers only after your respective action; SMS charges may apply under your mobile plan.</li>
+          <li><b>Location and weather:</b> When you initiate a weather request, Slothie sends latitude and longitude to five decimal places to the Open-Meteo API. Open-Meteo also receives your IP address as technically necessary for the internet connection. Names and phone numbers are not sent with this request. Slothie does not store a location history.</li>
+          <li><b>Navigation:</b> When you open a route or search, Slothie passes the entered or saved destination and selected travel mode to Google Maps or, if the app is unavailable, to a browser. Google Maps may process the device location according to its own settings and permissions.</li>
+          <li><b>Notifications:</b> Slothie may show generic notifications about messages and missed calls. Message text and contact details are not displayed as notification previews.</li>
+          <li><b>Retention and deletion:</b> App data stored locally remains until you change or delete it in Slothie, clear the app’s data in Android settings, or uninstall Slothie. SMS are stored separately in Android’s shared SMS database and must be deleted there using the SMS app; uninstalling Slothie does not necessarily remove them. Deleted app data cannot be recovered.</li>
+          <li><b>Permissions:</b> Phone, SMS, location, and notification access are used for the corresponding app features. You can revoke permissions in Android; dependent features will then be unavailable or limited.</li>
           <li>The app is aimed at adults, not at children.</li>
         </ul>
-        <p>Before the app is released, this policy will be supplemented by a binding, complete app privacy policy.</p>
+        <p>Because the provider does not receive app data on a server of its own, the provider cannot remotely read or delete these local data. Before release, this information must be checked against the final app build, all included components, and the Google Play Data safety form.</p>
 
         <h2>8. Your rights</h2>
         <p>Under the GDPR you have the right of access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20) and to object to processing based on legitimate interests (Art. 21). You may withdraw any consent at any time with effect for the future (Art. 7(3)). To exercise your rights, simply send an email to the address above.</p>
