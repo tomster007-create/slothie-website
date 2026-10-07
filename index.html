@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f5ed">
+  <meta name="description" content="Slothie bringt wichtige Kontakte, Telefonie, Nachrichten, Wetter und Navigation übersichtlich auf deinem Android-Smartphone zusammen.">
+  <title>Slothie — Das Wichtige ganz nah</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #30251f;
+      --muted: #746a61;
+      --paper: #f8f5ed;
+      --white: #fffefa;
+      --green: #526c4e;
+      --green-soft: #e6ecdf;
+      --orange: #bd692d;
+      --line: #e7dfd2;
+      --shadow: 0 24px 70px #3b2d1c14;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); }
+    a { color: inherit; }
+    button { font: inherit; }
+    .skip-link {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      padding: 10px 14px;
+      transform: translateY(-150%);
+      border-radius: 10px;
+      color: var(--white);
+      background: var(--ink);
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .shell { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    .site-header { position: relative; z-index: 2; }
+    .nav {
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid #30251f12;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: -.06em;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 12px;
+      mix-blend-mode: multiply;
+    }
+    .nav-right, .nav-links { display: flex; align-items: center; }
+    .nav-right { gap: 32px; }
+    .nav-links { gap: 30px; }
+    .nav-links a {
+      color: #62574e;
+      font-size: 14px;
+      font-weight: 550;
+      text-decoration: none;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .language-toggle {
+      min-width: 66px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--white);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .06em;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .language-toggle:hover { border-color: #a9b49f; background: var(--green-soft); }
+    :focus-visible { outline: 3px solid #78966f; outline-offset: 4px; }
+
+    .hero {
+      min-height: 670px;
+      display: grid;
+      grid-template-columns: 1.04fr .96fr;
+      align-items: center;
+      gap: 58px;
+      padding-block: 64px 72px;
+    }
+    .hero-copy { max-width: 570px; padding-block: 20px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 22px;
+      height: 1px;
+      content: "";
+      background: currentColor;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 500; }
+    h1 {
+      max-width: 610px;
+      margin: 22px 0 20px;
+      font-size: clamp(54px, 6.4vw, 82px);
+      letter-spacing: -.065em;
+      line-height: .99;
+    }
+    h1 em { color: var(--orange); font-weight: 500; }
+    .hero-lede {
+      max-width: 490px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 17px; flex-wrap: wrap; }
+    .button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      padding: 0 21px;
+      border: 1px solid var(--green);
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--green);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-2px); background: #40583d; }
+    .button .arrow { font-size: 18px; line-height: 1; }
+    .availability {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .availability::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      content: "";
+      background: #d48a4e;
+    }
+    .hero-visual {
+      min-height: 488px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+    .hero-visual::before {
+      position: absolute;
+      z-index: -2;
+      width: min(440px, 94%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      content: "";
+      background: #e9eadd;
+    }
+    .hero-visual::after {
+      position: absolute;
+      z-index: -1;
+      right: 2%;
+      bottom: 4%;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #9aab8c70;
+      border-radius: 50%;
+      content: "";
+    }
+    .phone {
+      width: 260px;
+      min-height: 472px;
+      padding: 10px;
+      transform: rotate(3deg);
+      border: 1px solid #3b2d1c20;
+      border-radius: 36px;
+      background: #312b27;
+      box-shadow: 0 30px 70px #30251f32, 0 4px 8px #30251f16;
+    }
+    .phone-screen {
+      min-height: 452px;
+      overflow: hidden;
+      border-radius: 27px;
+      background: #fffaf1;
+    }
+    .phone-status {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 17px 5px;
+      color: #4f453d;
+      font-size: 9px;
+      font-weight: 750;
+    }
+    .phone-notch { width: 65px; height: 13px; margin: 0 auto 8px; border-radius: 0 0 10px 10px; background: #312b27; }
+    .phone-head { display: flex; align-items: center; justify-content: space-between; padding: 7px 17px 15px; }
+    .phone-brand { font-family: Georgia, "Times New Roman", serif; font-size: 20px; font-weight: 700; letter-spacing: -.05em; }
+    .phone-settings { width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid #e7dfd2; border-radius: 9px; color: #71665c; font-size: 14px; }
+    .phone-content { padding: 0 16px; }
+    .phone-label { margin: 2px 0 4px; color: var(--green); font-size: 8px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .phone-title { margin: 0 0 12px; font-family: Georgia, "Times New Roman", serif; font-size: 22px; letter-spacing: -.04em; }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 9px;
+      margin-bottom: 8px;
+      border: 1px solid #eee6d8;
+      border-radius: 13px;
+      background: #fffefa;
+    }
+    .avatar { width: 33px; height: 33px; display: grid; place-items: center; border-radius: 50%; color: #4d644a; background: #e6ecdf; font-size: 10px; font-weight: 800; }
+    .contact-name { flex: 1; font-size: 10px; font-weight: 750; }
+    .contact-sub { margin-top: 3px; color: #877c71; font-size: 8px; font-weight: 450; }
+    .phone-action { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; color: #4f6d4a; background: #e6ecdf; font-size: 12px; }
+    .weather-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 12px;
+      margin-top: 12px;
+      border-radius: 13px;
+      background: #f0eadc;
+    }
+    .weather-city { font-size: 9px; font-weight: 750; }
+    .weather-copy { margin-top: 3px; color: #746a61; font-size: 8px; }
+    .weather-temp { font-family: Georgia, "Times New Roman", serif; font-size: 25px; }
+    .phone-tabs { display: flex; justify-content: space-around; padding: 12px 7px 10px; margin-top: 14px; border-top: 1px solid #eee6d8; color: #73695e; font-size: 8px; }
+    .phone-tabs span:first-child { color: var(--green); font-weight: 800; }
+    .float-note {
+      position: absolute;
+      right: -2%;
+      bottom: 18%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px 12px 12px;
+      border: 1px solid #e9e2d6;
+      border-radius: 17px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+      transform: rotate(-3deg);
+    }
+    .float-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px; color: var(--green); background: var(--green-soft); font-size: 16px; }
+
+    .trust-strip { border-block: 1px solid var(--line); background: #f2eee5; }
+    .trust-inner { min-height: 90px; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; }
+    .trust-item { display: flex; justify-content: center; align-items: center; gap: 11px; color: #5d534a; font-size: 13px; font-weight: 650; }
+    .trust-item + .trust-item { border-left: 1px solid var(--line); }
+    .trust-icon { color: var(--green); font-size: 18px; }
+
+    .section { padding-block: 110px; }
+    .section-heading { max-width: 610px; margin: 0 auto 54px; text-align: center; }
+    .section-heading .eyebrow { justify-content: center; }
+    .section-heading h2, .privacy-copy h2 {
+      margin: 15px 0 13px;
+      font-size: clamp(38px, 4.5vw, 54px);
+      letter-spacing: -.055em;
+      line-height: 1.05;
+    }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .feature-card {
+      min-height: 250px;
+      padding: 27px 27px 25px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--white);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .feature-icon { width: 43px; height: 43px; display: grid; place-items: center; margin-bottom: 26px; border-radius: 14px; color: var(--green); background: var(--green-soft); font-size: 20px; }
+    .feature-card:nth-child(2) .feature-icon, .feature-card:nth-child(5) .feature-icon { color: #a25b2b; background: #f4e8d9; }
+    .feature-card h3 { margin: 0 0 8px; font-size: 23px; letter-spacing: -.035em; }
+    .feature-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+    .privacy { padding-block: 92px; background: #e9ecdf; }
+    .privacy-layout { display: grid; grid-template-columns: .83fr 1.17fr; align-items: center; gap: 90px; }
+    .privacy-art {
+      min-height: 365px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 28px;
+      background: #f5f3ea;
+    }
+    .privacy-art::before, .privacy-art::after { position: absolute; width: 225px; height: 225px; border: 1px solid #89977f55; border-radius: 50%; content: ""; }
+    .privacy-art::after { width: 295px; height: 295px; }
+    .privacy-shield { position: relative; z-index: 1; width: 126px; height: 145px; display: grid; place-items: center; clip-path: polygon(50% 0, 91% 16%, 87% 62%, 72% 83%, 50% 100%, 28% 83%, 13% 62%, 9% 16%); color: var(--green); background: #e1e8d9; font-size: 58px; }
+    .privacy-copy { max-width: 500px; }
+    .privacy-copy h2 { margin-top: 15px; }
+    .privacy-copy > p { color: #625b52; font-size: 14px; line-height: 1.8; }
+    .privacy-list { display: grid; gap: 15px; padding: 0; margin: 25px 0 0; list-style: none; }
+    .privacy-list li { display: grid; grid-template-columns: 23px 1fr; gap: 11px; color: #514b43; font-size: 13px; line-height: 1.6; }
+    .privacy-list li::before { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; content: "✓"; color: var(--green); background: #d8e1ce; font-size: 12px; font-weight: 800; }
+    .privacy-note { padding-top: 14px; margin-top: 20px; border-top: 1px solid #cfd5c4; color: #756d63 !important; font-size: 11px !important; }
+
+    .closing { padding-block: 105px; text-align: center; }
+    .closing h2 { max-width: 660px; margin: 16px auto 14px; font-size: clamp(42px, 5vw, 60px); letter-spacing: -.06em; line-height: 1.02; }
+    .closing p { max-width: 530px; margin: 0 auto 26px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .site-footer { border-top: 1px solid var(--line); }
+    .footer-inner { min-height: 92px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 9px; font-family: Georgia, "Times New Roman", serif; font-size: 19px; font-weight: 700; letter-spacing: -.05em; }
+    .footer-brand img { width: 28px; height: 28px; border-radius: 8px; object-fit: cover; mix-blend-mode: multiply; }
+    .footer-copy { color: var(--muted); font-size: 11px; }
+    .footer-status { display: flex; align-items: center; gap: 7px; color: #665c52; font-size: 11px; }
+    .footer-status::before { width: 6px; height: 6px; border-radius: 50%; content: ""; background: #d48a4e; }
+
+    @media (max-width: 850px) {
+      .nav { min-height: 76px; }
+      .nav-right { gap: 17px; }
+      .nav-links { gap: 18px; }
+      .hero { min-height: 590px; grid-template-columns: 1fr .85fr; gap: 25px; padding-block: 50px; }
+      .hero-visual { min-height: 430px; }
+      .phone { transform: scale(.9) rotate(3deg); }
+      .float-note { right: -5%; }
+      .privacy-layout { grid-template-columns: .9fr 1.1fr; gap: 45px; }
+      .privacy-art { min-height: 320px; }
+    }
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 36px, 460px); }
+      .nav { min-height: 70px; }
+      .brand { font-size: 24px; }
+      .brand-mark { width: 35px; height: 35px; }
+      .nav-right { gap: 12px; }
+      .nav-links { display: none; }
+      .language-toggle { min-width: 59px; padding: 8px 10px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 8px; padding-block: 58px 56px; }
+      h1 { max-width: 480px; margin-top: 17px; font-size: clamp(52px, 14vw, 72px); }
+      .hero-lede { font-size: 15px; }
+      .hero-visual { min-height: 430px; margin-top: 9px; }
+      .phone { transform: scale(.86) rotate(3deg); }
+      .float-note { right: -1%; bottom: 15%; }
+      .trust-inner { grid-template-columns: 1fr; padding-block: 8px; }
+      .trust-item { justify-content: flex-start; min-height: 48px; padding-inline: 4px; font-size: 12px; }
+      .trust-item + .trust-item { border-top: 1px solid var(--line); border-left: 0; }
+      .section { padding-block: 78px; }
+      .section-heading { margin-bottom: 32px; }
+      .section-heading h2, .privacy-copy h2 { font-size: 42px; }
+      .feature-grid { grid-template-columns: 1fr; gap: 12px; }
+      .feature-card { min-height: auto; padding: 22px; }
+      .feature-icon { margin-bottom: 19px; }
+      .privacy { padding-block: 62px; }
+      .privacy-layout { grid-template-columns: 1fr; gap: 32px; }
+      .privacy-art { min-height: 235px; }
+      .privacy-art::before { width: 165px; height: 165px; }
+      .privacy-art::after { width: 220px; height: 220px; }
+      .privacy-shield { transform: scale(.78); }
+      .closing { padding-block: 78px; }
+      .closing h2 { font-size: 46px; }
+      .footer-inner { min-height: 112px; flex-wrap: wrap; justify-content: space-between; padding-block: 19px; }
+      .footer-copy { order: 1; flex-basis: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Hauptnavigation">
+      <a class="brand" href="#" aria-label="Slothie Startseite" data-i18n-aria="brandAria">
+        <img class="brand-mark" src="logo.png" alt="">
+        <span>slothie</span>
+      </a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#features" data-i18n="navFeatures">Funktionen</a>
+          <a href="#privacy" data-i18n="navPrivacy">Datenschutz</a>
+        </div>
+        <button class="language-toggle" type="button" aria-label="Switch to English" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow" data-i18n="heroEyebrow">Weniger suchen. Mehr verbunden sein.</span>
+        <h1 id="hero-title" data-i18n="heroTitle">Das Wichtige<br>ganz <em>nah.</em></h1>
+        <p class="hero-lede" data-i18n="heroLede">Slothie bringt deine wichtigsten Kontakte, Anrufe und Nachrichten an einen ruhigen, übersichtlichen Ort. Dazu: Wetter, Wege und Hilfe, wenn du sie brauchst.</p>
+        <div class="hero-actions">
+          <a class="button" href="#features"><span data-i18n="heroButton">Slothie kennenlernen</span><span class="arrow" aria-hidden="true">↗</span></a>
+          <span class="availability" data-i18n="availability">Android-App in Entwicklung</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" role="img" aria-label="Vorschau der Slothie-App auf einem Smartphone" data-i18n-aria="heroImageAria">
+        <div class="phone" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="phone-status"><span>9:41</span><span>● ● ▰</span></div>
+            <div class="phone-notch"></div>
+            <div class="phone-head"><span class="phone-brand">slothie</span><span class="phone-settings">⚙</span></div>
+            <div class="phone-content">
+              <p class="phone-label" data-i18n="mockEyebrow">Deine Menschen</p>
+              <h2 class="phone-title" data-i18n="mockTitle">Kontakte</h2>
+              <div class="contact-card"><span class="avatar">AM</span><span class="contact-name"><span data-i18n="mockContact1">Alex Morgan</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true">☎</span></div>
+              <div class="contact-card"><span class="avatar" style="color:#a15d32;background:#f4e8d9">JM</span><span class="contact-name"><span data-i18n="mockContact2">Jamie Morgan</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true">☎</span></div>
+              <div class="contact-card"><span class="avatar" style="color:#806098;background:#eee7f2">SK</span><span class="contact-name"><span data-i18n="mockContact3">Sam Keller</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true">☎</span></div>
+              <div class="weather-card"><span><span class="weather-city" data-i18n="mockWeatherCity">Heute in deiner Nähe</span><span class="weather-copy" data-i18n="mockWeather">Leicht bewölkt</span></span><span class="weather-temp">18°</span></div>
+            </div>
+            <div class="phone-tabs"><span data-i18n="mockTabContacts">♡ Kontakte</span><span data-i18n="mockTabMap">⌖ Karte</span><span data-i18n="mockTabHelp">? Hilfe</span></div>
+          </div>
+        </div>
+        <div class="float-note"><span class="float-icon" aria-hidden="true">♡</span><span data-i18n="floatNote">Deine Kontakte.<br>Deine Entscheidung.</span></div>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Slothie-Grundsätze">
+      <div class="trust-inner shell">
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">◎</span><span data-i18n="trust1">Für Erwachsene gemacht</span></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">⌂</span><span data-i18n="trust2">Du behältst die Kontrolle</span></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">◉</span><span data-i18n="trust3">Ruhig. Klar. Persönlich.</span></div>
+      </div>
+    </section>
+
+    <section class="section shell" id="features" aria-labelledby="features-title">
+      <div class="section-heading">
+        <span class="eyebrow" data-i18n="featuresEyebrow">Alles Wichtige an einem Ort</span>
+        <h2 id="features-title" data-i18n="featuresTitle">Einfacher im Alltag.<br>Verbunden bleiben.</h2>
+        <p data-i18n="featuresIntro">Slothie schafft einen klaren Zugang zu den Dingen, die du oft brauchst – ohne dir vorzuschreiben, wie du dein Smartphone verwendest.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">♡</span>
+          <h3 data-i18n="featureContactsTitle">Deine Kontakte</h3>
+          <p data-i18n="featureContactsCopy">Wähle die Menschen aus, die dir wichtig sind, und finde sie schnell wieder. Anrufen oder schreiben – direkt vom Kontakt aus.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">✉</span>
+          <h3 data-i18n="featureMessagesTitle">Nachrichten, wie du magst</h3>
+          <p data-i18n="featureMessagesCopy">Wähle je Kontakt SMS, WhatsApp oder Signal – sofern die jeweilige App auf deinem Gerät installiert ist.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">☀</span>
+          <h3 data-i18n="featureWeatherTitle">Wetter &amp; Wege</h3>
+          <p data-i18n="featureWeatherCopy">Sieh das Wetter für heute und morgen, speichere wichtige Orte und übergib eine Route an Google Maps.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">⌖</span>
+          <h3 data-i18n="featureLocationTitle">Standort bewusst teilen</h3>
+          <p data-i18n="featureLocationCopy">Teile deinen Standort einmalig und nur dann, wenn du es möchtest – mit Menschen, die du selbst auswählst.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">?</span>
+          <h3 data-i18n="featureHelpTitle">Hilfe gut erreichbar</h3>
+          <p data-i18n="featureHelpCopy">Deine Vertrauenspersonen und hilfreiche Hinweise sind übersichtlich an einem eigenen Ort gesammelt.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">◒</span>
+          <h3 data-i18n="featurePersonalTitle">So, wie es zu dir passt</h3>
+          <p data-i18n="featurePersonalCopy">Wechsle zwischen Deutsch und Englisch und wähle aus verschiedenen Farbwelten – passend zu dir und deinem Alltag.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="privacy" id="privacy" aria-labelledby="privacy-title">
+      <div class="privacy-layout shell">
+        <div class="privacy-art" role="img" aria-label="Symbol für Datenschutz und Sicherheit" data-i18n-aria="privacyImageAria">
+          <div class="privacy-shield" aria-hidden="true">✓</div>
+        </div>
+        <div class="privacy-copy">
+          <span class="eyebrow" data-i18n="privacyEyebrow">Dein Smartphone. Deine Daten.</span>
+          <h2 id="privacy-title" data-i18n="privacyTitle">Mehr Übersicht.<br>Nicht mehr Überwachung.</h2>
+          <p data-i18n="privacyIntro">Slothie soll dir den Alltag erleichtern – und dich selbst entscheiden lassen. Die App ist als normale Android-App gedacht: Du kannst jederzeit andere Apps und die gewohnte Bedienung deines Smartphones nutzen.</p>
+          <ul class="privacy-list">
+            <li data-i18n="privacyPoint1">Kein Benutzerkonto und kein eigener Slothie-Server laut aktuellem Konzept.</li>
+            <li data-i18n="privacyPoint2">Kontakte, gespeicherte Orte und Einstellungen bleiben lokal auf deinem Gerät.</li>
+            <li data-i18n="privacyPoint3">Standortfreigabe nur nach deiner ausdrücklichen Aktion; kein Standortverlauf durch Slothie.</li>
+            <li data-i18n="privacyPoint4">Berechtigungen entscheidest du selbst und kannst sie in Android jederzeit ändern.</li>
+          </ul>
+          <p class="privacy-note" data-i18n="privacyNote">Transparenz-Hinweis: Wetterabfragen nutzen Open-Meteo; bei Navigation und externen Nachrichten-Apps gelten zusätzlich deren Datenschutzregeln. Details werden vor Veröffentlichung überprüft und ergänzt.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing shell" aria-labelledby="closing-title">
+      <span class="eyebrow" data-i18n="closingEyebrow">Klarheit, die gut tut</span>
+      <h2 id="closing-title" data-i18n="closingTitle">Technik, die sich nach dir richtet.</h2>
+      <p data-i18n="closingCopy">Slothie ist in Entwicklung. Wir arbeiten an einer übersichtlichen Android-App für mehr Orientierung und Nähe im digitalen Alltag.</p>
+      <span class="availability" data-i18n="closingStatus">Noch nicht im Google Play Store verfügbar</span>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner shell">
+      <div class="footer-brand"><img src="logo.png" alt=""><span>slothie</span></div>
+      <span class="footer-copy" data-i18n="footerCopy">Mit Ruhe gestaltet. Mit dir im Mittelpunkt.</span>
+      <span class="footer-status" data-i18n="footerStatus">Android-App in Entwicklung</span>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      de: {
+        brandAria: "Slothie Startseite",
+        heroImageAria: "Vorschau der Slothie-App auf einem Smartphone",
+        privacyImageAria: "Symbol für Datenschutz und Sicherheit",
+        skip: "Zum Inhalt springen",
+        navFeatures: "Funktionen",
+        navPrivacy: "Datenschutz",
+        heroEyebrow: "Weniger suchen. Mehr verbunden sein.",
+        heroTitle: "Das Wichtige<br>ganz <em>nah.</em>",
+        heroLede: "Slothie bringt deine wichtigsten Kontakte, Anrufe und Nachrichten an einen ruhigen, übersichtlichen Ort. Dazu: Wetter, Wege und Hilfe, wenn du sie brauchst.",
+        heroButton: "Slothie kennenlernen",
+        availability: "Android-App in Entwicklung",
+        mockEyebrow: "Deine Menschen",
+        mockTitle: "Kontakte",
+        mockContact1: "Alex Morgan",
+        mockContact2: "Jamie Morgan",
+        mockContact3: "Sam Keller",
+        mockContactSub: "Zuletzt hinzugefügt",
+        mockWeatherCity: "Heute in deiner Nähe",
+        mockWeather: "Leicht bewölkt",
+        mockTabContacts: "♡ Kontakte",
+        mockTabMap: "⌖ Karte",
+        mockTabHelp: "? Hilfe",
+        floatNote: "Deine Kontakte.<br>Deine Entscheidung.",
+        trust1: "Für Erwachsene gemacht",
+        trust2: "Du behältst die Kontrolle",
+        trust3: "Ruhig. Klar. Persönlich.",
+        featuresEyebrow: "Alles Wichtige an einem Ort",
+        featuresTitle: "Einfacher im Alltag.<br>Verbunden bleiben.",
+        featuresIntro: "Slothie schafft einen klaren Zugang zu den Dingen, die du oft brauchst – ohne dir vorzuschreiben, wie du dein Smartphone verwendest.",
+        featureContactsTitle: "Deine Kontakte",
+        featureContactsCopy: "Wähle die Menschen aus, die dir wichtig sind, und finde sie schnell wieder. Anrufen oder schreiben – direkt vom Kontakt aus.",
+        featureMessagesTitle: "Nachrichten, wie du magst",
+        featureMessagesCopy: "Wähle je Kontakt SMS, WhatsApp oder Signal – sofern die jeweilige App auf deinem Gerät installiert ist.",
+        featureWeatherTitle: "Wetter & Wege",
+        featureWeatherCopy: "Sieh das Wetter für heute und morgen, speichere wichtige Orte und übergib eine Route an Google Maps.",
+        featureLocationTitle: "Standort bewusst teilen",
+        featureLocationCopy: "Teile deinen Standort einmalig und nur dann, wenn du es möchtest – mit Menschen, die du selbst auswählst.",
+        featureHelpTitle: "Hilfe gut erreichbar",
+        featureHelpCopy: "Deine Vertrauenspersonen und hilfreiche Hinweise sind übersichtlich an einem eigenen Ort gesammelt.",
+        featurePersonalTitle: "So, wie es zu dir passt",
+        featurePersonalCopy: "Wechsle zwischen Deutsch und Englisch und wähle aus verschiedenen Farbwelten – passend zu dir und deinem Alltag.",
+        privacyEyebrow: "Dein Smartphone. Deine Daten.",
+        privacyTitle: "Mehr Übersicht.<br>Nicht mehr Überwachung.",
+        privacyIntro: "Slothie soll dir den Alltag erleichtern – und dich selbst entscheiden lassen. Die App ist als normale Android-App gedacht: Du kannst jederzeit andere Apps und die gewohnte Bedienung deines Smartphones nutzen.",
+        privacyPoint1: "Kein Benutzerkonto und kein eigener Slothie-Server laut aktuellem Konzept.",
+        privacyPoint2: "Kontakte, gespeicherte Orte und Einstellungen bleiben lokal auf deinem Gerät.",
+        privacyPoint3: "Standortfreigabe nur nach deiner ausdrücklichen Aktion; kein Standortverlauf durch Slothie.",
+        privacyPoint4: "Berechtigungen entscheidest du selbst und kannst sie in Android jederzeit ändern.",
+        privacyNote: "Transparenz-Hinweis: Wetterabfragen nutzen Open-Meteo; bei Navigation und externen Nachrichten-Apps gelten zusätzlich deren Datenschutzregeln. Details werden vor Veröffentlichung überprüft und ergänzt.",
+        closingEyebrow: "Klarheit, die gut tut",
+        closingTitle: "Technik, die sich nach dir richtet.",
+        closingCopy: "Slothie ist in Entwicklung. Wir arbeiten an einer übersichtlichen Android-App für mehr Orientierung und Nähe im digitalen Alltag.",
+        closingStatus: "Noch nicht im Google Play Store verfügbar",
+        footerCopy: "Mit Ruhe gestaltet. Mit dir im Mittelpunkt.",
+        footerStatus: "Android-App in Entwicklung"
+      },
+      en: {
+        brandAria: "Slothie home",
+        heroImageAria: "Preview of the Slothie app on a phone",
+        privacyImageAria: "Privacy and security symbol",
+        skip: "Skip to content",
+        navFeatures: "Features",
+        navPrivacy: "Privacy",
+        heroEyebrow: "Less searching. More connection.",
+        heroTitle: "What matters,<br><em>closer.</em>",
+        heroLede: "Slothie brings your favourite people, calls and messages together in one calm, clear place. Plus weather, directions and a helping hand when you need them.",
+        heroButton: "Get to know Slothie",
+        availability: "Android app in development",
+        mockEyebrow: "Your people",
+        mockTitle: "Contacts",
+        mockContact1: "Alex Morgan",
+        mockContact2: "Jamie Morgan",
+        mockContact3: "Sam Keller",
+        mockContactSub: "Recently added",
+        mockWeatherCity: "Today near you",
+        mockWeather: "Partly cloudy",
+        mockTabContacts: "♡ People",
+        mockTabMap: "⌖ Map",
+        mockTabHelp: "? Help",
+        floatNote: "Your contacts.<br>Your choice.",
+        trust1: "Made for adults",
+        trust2: "You stay in control",
+        trust3: "Calm. Clear. Personal.",
+        featuresEyebrow: "The essentials, all in one place",
+        featuresTitle: "A little easier,<br>every day.",
+        featuresIntro: "Slothie gives you a clear way to reach the things you use most—without dictating how you use your phone.",
+        featureContactsTitle: "Your people",
+        featureContactsCopy: "Choose the people who matter to you and find them quickly. Call or message them right from their contact card.",
+        featureMessagesTitle: "Message your way",
+        featureMessagesCopy: "Choose SMS, WhatsApp or Signal for each contact, as long as the app is installed on your phone.",
+        featureWeatherTitle: "Weather & directions",
+        featureWeatherCopy: "Check today's and tomorrow's forecast, save favourite places and open a route in Google Maps.",
+        featureLocationTitle: "Share your location, your choice",
+        featureLocationCopy: "Share your location once, only when you choose, and only with people you select.",
+        featureHelpTitle: "Help close at hand",
+        featureHelpCopy: "Keep your trusted people and useful guidance together in a clear, dedicated place.",
+        featurePersonalTitle: "Make it yours",
+        featurePersonalCopy: "Switch between English and German, and choose from a range of colour palettes to suit you.",
+        privacyEyebrow: "Your phone. Your data.",
+        privacyTitle: "More clarity.<br>Not more tracking.",
+        privacyIntro: "Slothie is designed to make everyday life easier while keeping you in charge. It works as a regular Android app, so your other apps and familiar phone controls are always there.",
+        privacyPoint1: "No account and no Slothie-operated server, according to the current design.",
+        privacyPoint2: "Contacts, saved places and settings stay on your device.",
+        privacyPoint3: "Location is shared only when you explicitly choose to; Slothie does not keep a location history.",
+        privacyPoint4: "You choose which permissions to grant and can change them in Android at any time.",
+        privacyNote: "Transparency note: Weather requests use Open-Meteo. Google Maps and external messaging apps have their own privacy policies. Details will be reviewed and completed before release.",
+        closingEyebrow: "A little more peace of mind",
+        closingTitle: "Technology that fits around you.",
+        closingCopy: "Slothie is in development. We're building a clear, approachable Android app to help you feel more at home in your digital day.",
+        closingStatus: "Not yet available on Google Play",
+        footerCopy: "Made with care. With you in mind.",
+        footerStatus: "Android app in development"
+      }
+    };
+
+    const languageButton = document.querySelector(".language-toggle");
+
+    function setLanguage(language) {
+      const selected = translations[language] ? language : "de";
+      document.documentElement.lang = selected;
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const translation = translations[selected][element.dataset.i18n];
+        if (translation) element.innerHTML = translation;
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+        const translation = translations[selected][element.dataset.i18nAria];
+        if (translation) element.setAttribute("aria-label", translation);
+      });
+      languageButton.textContent = selected === "de" ? "EN" : "DE";
+      languageButton.setAttribute("aria-label", selected === "de" ? "Switch to English" : "Zu Deutsch wechseln");
+      languageButton.setAttribute("aria-pressed", String(selected === "en"));
+      document.title = selected === "de" ? "Slothie — Das Wichtige ganz nah" : "Slothie — What matters, closer";
+      document.querySelector('meta[name="description"]').content = selected === "de"
+        ? "Slothie bringt wichtige Kontakte, Telefonie, Nachrichten, Wetter und Navigation übersichtlich auf deinem Android-Smartphone zusammen."
+        : "Slothie brings your favourite contacts, calls, messages, weather and directions together on your Android phone.";
+    }
+
+    languageButton.addEventListener("click", () => {
+      setLanguage(document.documentElement.lang === "de" ? "en" : "de");
+    });
+  </script>
+</body>
+</html>
