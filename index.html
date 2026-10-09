@@ -63,11 +63,8 @@
       text-decoration: none;
     }
     .brand-mark {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 12px;
-      mix-blend-mode: multiply;
+      width: auto;
+      height: 48px;
     }
     .nav-right, .nav-links { display: flex; align-items: center; }
     .nav-right { gap: 32px; }
@@ -138,6 +135,7 @@
       line-height: 1.75;
     }
     .hero-actions { display: flex; align-items: center; gap: 17px; flex-wrap: wrap; }
+    .icon { display: block; width: 1em; height: 1em; flex: none; }
     .button {
       min-height: 52px;
       display: inline-flex;
@@ -221,10 +219,19 @@
       font-size: 9px;
       font-weight: 750;
     }
+    .phone-status-icons { display: flex; align-items: end; gap: 2px; height: 9px; }
+    .phone-status-icons i { width: 2px; border-radius: 1px; background: currentColor; }
+    .phone-status-icons i:nth-child(1) { height: 3px; }
+    .phone-status-icons i:nth-child(2) { height: 5px; }
+    .phone-status-icons i:nth-child(3) { height: 7px; }
+    .phone-status-icons i:nth-child(4) { height: 9px; }
+    .phone-battery { width: 9px; height: 6px; margin-left: 2px; border: 1px solid currentColor; border-radius: 1px; position: relative; }
+    .phone-battery::after { position: absolute; top: 1px; right: -3px; width: 2px; height: 2px; content: ""; background: currentColor; }
     .phone-notch { width: 65px; height: 13px; margin: 0 auto 8px; border-radius: 0 0 10px 10px; background: #312b27; }
     .phone-head { display: flex; align-items: center; justify-content: space-between; padding: 7px 17px 15px; }
     .phone-brand { font-family: Georgia, "Times New Roman", serif; font-size: 20px; font-weight: 700; letter-spacing: -.05em; }
-    .phone-settings { width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid #e7dfd2; border-radius: 9px; color: #71665c; font-size: 14px; }
+    .phone-settings { width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid #e7dfd2; border-radius: 9px; color: #71665c; }
+    .phone-settings .icon { width: 15px; height: 15px; }
     .phone-content { padding: 0 16px; }
     .phone-label { margin: 2px 0 4px; color: var(--green); font-size: 8px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
     .phone-title { margin: 0 0 12px; font-family: Georgia, "Times New Roman", serif; font-size: 22px; letter-spacing: -.04em; }
@@ -241,7 +248,8 @@
     .avatar { width: 33px; height: 33px; display: grid; place-items: center; border-radius: 50%; color: #4d644a; background: #e6ecdf; font-size: 10px; font-weight: 800; }
     .contact-name { flex: 1; font-size: 10px; font-weight: 750; }
     .contact-sub { margin-top: 3px; color: #877c71; font-size: 8px; font-weight: 450; }
-    .phone-action { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; color: #4f6d4a; background: #e6ecdf; font-size: 12px; }
+    .phone-action { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; color: #4f6d4a; background: #e6ecdf; }
+    .phone-action .icon { width: 15px; height: 15px; }
     .weather-card {
       display: flex;
       align-items: center;
@@ -255,6 +263,8 @@
     .weather-copy { margin-top: 3px; color: #746a61; font-size: 8px; }
     .weather-temp { font-family: Georgia, "Times New Roman", serif; font-size: 25px; }
     .phone-tabs { display: flex; justify-content: space-around; padding: 12px 7px 10px; margin-top: 14px; border-top: 1px solid #eee6d8; color: #73695e; font-size: 8px; }
+    .phone-tabs span { display: inline-flex; align-items: center; gap: 3px; }
+    .phone-tabs .icon { width: 12px; height: 12px; }
     .phone-tabs span:first-child { color: var(--green); font-weight: 800; }
     .float-note {
       position: absolute;
@@ -273,13 +283,15 @@
       line-height: 1.4;
       transform: rotate(-3deg);
     }
-    .float-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px; color: var(--green); background: var(--green-soft); font-size: 16px; }
+    .float-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px; color: var(--green); background: var(--green-soft); }
+    .float-icon .icon { width: 18px; height: 18px; }
 
     .trust-strip { border-block: 1px solid var(--line); background: #f2eee5; }
     .trust-inner { min-height: 90px; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; }
     .trust-item { display: flex; justify-content: center; align-items: center; gap: 11px; color: #5d534a; font-size: 13px; font-weight: 650; }
     .trust-item + .trust-item { border-left: 1px solid var(--line); }
-    .trust-icon { color: var(--green); font-size: 18px; }
+    .trust-icon { color: var(--green); }
+    .trust-icon .icon { width: 19px; height: 19px; }
 
     .section { padding-block: 110px; }
     .section-heading { max-width: 610px; margin: 0 auto 54px; text-align: center; }
@@ -303,6 +315,7 @@
     .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
     .feature-icon { width: 43px; height: 43px; display: grid; place-items: center; margin-bottom: 26px; border-radius: 14px; color: var(--green); background: var(--green-soft); font-size: 20px; }
     .feature-card:nth-child(2) .feature-icon, .feature-card:nth-child(5) .feature-icon { color: #a25b2b; background: #f4e8d9; }
+    .feature-icon .icon { width: 21px; height: 21px; }
     .feature-card h3 { margin: 0 0 8px; font-size: 23px; letter-spacing: -.035em; }
     .feature-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
 
@@ -319,13 +332,15 @@
     }
     .privacy-art::before, .privacy-art::after { position: absolute; width: 225px; height: 225px; border: 1px solid #89977f55; border-radius: 50%; content: ""; }
     .privacy-art::after { width: 295px; height: 295px; }
-    .privacy-shield { position: relative; z-index: 1; width: 126px; height: 145px; display: grid; place-items: center; clip-path: polygon(50% 0, 91% 16%, 87% 62%, 72% 83%, 50% 100%, 28% 83%, 13% 62%, 9% 16%); color: var(--green); background: #e1e8d9; font-size: 58px; }
+    .privacy-shield { position: relative; z-index: 1; width: 126px; height: 145px; display: grid; place-items: center; color: var(--green); }
+    .privacy-shield .icon { width: 100px; height: 100px; }
     .privacy-copy { max-width: 500px; }
     .privacy-copy h2 { margin-top: 15px; }
     .privacy-copy > p { color: #625b52; font-size: 14px; line-height: 1.8; }
     .privacy-list { display: grid; gap: 15px; padding: 0; margin: 25px 0 0; list-style: none; }
     .privacy-list li { display: grid; grid-template-columns: 23px 1fr; gap: 11px; color: #514b43; font-size: 13px; line-height: 1.6; }
-    .privacy-list li::before { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; content: "✓"; color: var(--green); background: #d8e1ce; font-size: 12px; font-weight: 800; }
+    .privacy-check { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; color: var(--green); background: #d8e1ce; }
+    .privacy-check .icon { width: 13px; height: 13px; }
     .privacy-note { padding-top: 14px; margin-top: 20px; border-top: 1px solid #cfd5c4; color: #756d63 !important; font-size: 11px !important; }
 
     .closing { padding-block: 105px; text-align: center; }
@@ -334,7 +349,7 @@
     .site-footer { border-top: 1px solid var(--line); }
     .footer-inner { min-height: 92px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .footer-brand { display: flex; align-items: center; gap: 9px; font-family: Georgia, "Times New Roman", serif; font-size: 19px; font-weight: 700; letter-spacing: -.05em; }
-    .footer-brand img { width: 28px; height: 28px; border-radius: 8px; object-fit: cover; mix-blend-mode: multiply; }
+    .footer-brand img { width: auto; height: 34px; }
     .footer-copy { color: var(--muted); font-size: 11px; }
     .footer-links { display: flex; gap: 18px; font-size: 11px; }
     .footer-links a { color: #665c52; }
@@ -356,7 +371,7 @@
       .shell { width: min(100% - 36px, 460px); }
       .nav { min-height: 70px; }
       .brand { font-size: 24px; }
-      .brand-mark { width: 35px; height: 35px; }
+      .brand-mark { height: 42px; }
       .nav-right { gap: 12px; }
       .nav-links { display: none; }
       .language-toggle { min-width: 59px; padding: 8px 10px; }
@@ -417,7 +432,7 @@
         <h1 id="hero-title" data-i18n="heroTitle">Das Wichtige<br>ganz <em>nah.</em></h1>
         <p class="hero-lede" data-i18n="heroLede">Slothie bringt deine wichtigsten Kontakte, Anrufe und Nachrichten an einen ruhigen, übersichtlichen Ort. Dazu: Wetter, Wege und Hilfe, wenn du sie brauchst.</p>
         <div class="hero-actions">
-          <a class="button" href="#features"><span data-i18n="heroButton">Slothie kennenlernen</span><span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="button" href="#features"><span data-i18n="heroButton">Slothie kennenlernen</span><span class="arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg></span></a>
           <span class="availability" data-i18n="availability">Android-App in Entwicklung</span>
         </div>
       </div>
@@ -425,29 +440,29 @@
       <div class="hero-visual" role="img" aria-label="Vorschau der Slothie-App auf einem Smartphone" data-i18n-aria="heroImageAria">
         <div class="phone" aria-hidden="true">
           <div class="phone-screen">
-            <div class="phone-status"><span>9:41</span><span>● ● ▰</span></div>
+            <div class="phone-status"><span>9:41</span><span class="phone-status-icons" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="phone-battery"></span></span></div>
             <div class="phone-notch"></div>
-            <div class="phone-head"><span class="phone-brand">slothie</span><span class="phone-settings">⚙</span></div>
+            <div class="phone-head"><span class="phone-brand">slothie</span><span class="phone-settings"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /><circle cx="12" cy="12" r="3" /></svg></span></div>
             <div class="phone-content">
               <p class="phone-label" data-i18n="mockEyebrow">Deine Menschen</p>
               <h2 class="phone-title" data-i18n="mockTitle">Kontakte</h2>
-              <div class="contact-card"><span class="avatar">AM</span><span class="contact-name"><span data-i18n="mockContact1">Alex Morgan</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true">☎</span></div>
-              <div class="contact-card"><span class="avatar" style="color:#a15d32;background:#f4e8d9">JM</span><span class="contact-name"><span data-i18n="mockContact2">Jamie Morgan</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true">☎</span></div>
-              <div class="contact-card"><span class="avatar" style="color:#806098;background:#eee7f2">SK</span><span class="contact-name"><span data-i18n="mockContact3">Sam Keller</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true">☎</span></div>
+              <div class="contact-card"><span class="avatar">AM</span><span class="contact-name"><span data-i18n="mockContact1">Alex Morgan</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg></span></div>
+              <div class="contact-card"><span class="avatar" style="color:#a15d32;background:#f4e8d9">JM</span><span class="contact-name"><span data-i18n="mockContact2">Jamie Morgan</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg></span></div>
+              <div class="contact-card"><span class="avatar" style="color:#806098;background:#eee7f2">SK</span><span class="contact-name"><span data-i18n="mockContact3">Sam Keller</span><span class="contact-sub" data-i18n="mockContactSub">Zuletzt hinzugefügt</span></span><span class="phone-action" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg></span></div>
               <div class="weather-card"><span><span class="weather-city" data-i18n="mockWeatherCity">Heute in deiner Nähe</span><span class="weather-copy" data-i18n="mockWeather">Leicht bewölkt</span></span><span class="weather-temp">18°</span></div>
             </div>
-            <div class="phone-tabs"><span data-i18n="mockTabContacts">♡ Kontakte</span><span data-i18n="mockTabMap">⌖ Karte</span><span data-i18n="mockTabHelp">? Hilfe</span></div>
+            <div class="phone-tabs"><span><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></svg><span data-i18n="mockTabContacts">Kontakte</span></span><span><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /><path d="M15 5.764v15" /><path d="M9 3.236v15" /></svg><span data-i18n="mockTabMap">Karte</span></span><span><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg><span data-i18n="mockTabHelp">Hilfe</span></span></div>
           </div>
         </div>
-        <div class="float-note"><span class="float-icon" aria-hidden="true">♡</span><span data-i18n="floatNote">Deine Kontakte.<br>Deine Entscheidung.</span></div>
+        <div class="float-note"><span class="float-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg></span><span data-i18n="floatNote">Deine Kontakte.<br>Deine Entscheidung.</span></div>
       </div>
     </section>
 
     <section class="trust-strip" aria-label="Slothie-Grundsätze">
       <div class="trust-inner shell">
-        <div class="trust-item"><span class="trust-icon" aria-hidden="true">◎</span><span data-i18n="trust1">Für Erwachsene gemacht</span></div>
-        <div class="trust-item"><span class="trust-icon" aria-hidden="true">⌂</span><span data-i18n="trust2">Du behältst die Kontrolle</span></div>
-        <div class="trust-item"><span class="trust-icon" aria-hidden="true">◉</span><span data-i18n="trust3">Ruhig. Klar. Persönlich.</span></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></svg></span><span data-i18n="trust1">Für Erwachsene gemacht</span></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg></span><span data-i18n="trust2">Du behältst die Kontrolle</span></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></span><span data-i18n="trust3">Ruhig. Klar. Persönlich.</span></div>
       </div>
     </section>
 
@@ -459,32 +474,32 @@
       </div>
       <div class="feature-grid">
         <article class="feature-card">
-          <span class="feature-icon" aria-hidden="true">♡</span>
+          <span class="feature-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg></span>
           <h3 data-i18n="featureContactsTitle">Deine Kontakte</h3>
           <p data-i18n="featureContactsCopy">Wähle die Menschen aus, die dir wichtig sind, und finde sie schnell wieder. Anrufen oder schreiben – direkt vom Kontakt aus.</p>
         </article>
         <article class="feature-card">
-          <span class="feature-icon" aria-hidden="true">✉</span>
+          <span class="feature-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></span>
           <h3 data-i18n="featureMessagesTitle">Nachrichten per SMS</h3>
           <p data-i18n="featureMessagesCopy">Schreibe deinen Kontakten direkt per SMS – übersichtlich in Slothie, wenn du die App als Standard-SMS-App festlegst.</p>
         </article>
         <article class="feature-card">
-          <span class="feature-icon" aria-hidden="true">☀</span>
+          <span class="feature-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41-1.41" /></svg></span>
           <h3 data-i18n="featureWeatherTitle">Wetter &amp; Wege</h3>
           <p data-i18n="featureWeatherCopy">Sieh das Wetter für heute und morgen, speichere wichtige Orte und übergib eine Route an Google Maps.</p>
         </article>
         <article class="feature-card">
-          <span class="feature-icon" aria-hidden="true">⌖</span>
+          <span class="feature-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg></span>
           <h3 data-i18n="featureLocationTitle">Standort bewusst teilen</h3>
           <p data-i18n="featureLocationCopy">Teile deinen Standort einmalig und nur dann, wenn du es möchtest – mit Menschen, die du selbst auswählst.</p>
         </article>
         <article class="feature-card">
-          <span class="feature-icon" aria-hidden="true">?</span>
+          <span class="feature-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg></span>
           <h3 data-i18n="featureHelpTitle">Hilfe gut erreichbar</h3>
           <p data-i18n="featureHelpCopy">Deine Vertrauenspersonen und hilfreiche Hinweise sind übersichtlich an einem eigenen Ort gesammelt.</p>
         </article>
         <article class="feature-card">
-          <span class="feature-icon" aria-hidden="true">◒</span>
+          <span class="feature-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg></span>
           <h3 data-i18n="featurePersonalTitle">So, wie es zu dir passt</h3>
           <p data-i18n="featurePersonalCopy">Wechsle zwischen Deutsch und Englisch und wähle aus verschiedenen Farbwelten – passend zu dir und deinem Alltag.</p>
         </article>
@@ -494,17 +509,17 @@
     <section class="privacy" id="privacy" aria-labelledby="privacy-title">
       <div class="privacy-layout shell">
         <div class="privacy-art" role="img" aria-label="Symbol für Datenschutz und Sicherheit" data-i18n-aria="privacyImageAria">
-          <div class="privacy-shield" aria-hidden="true">✓</div>
+          <div class="privacy-shield" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg></div>
         </div>
         <div class="privacy-copy">
           <span class="eyebrow" data-i18n="privacyEyebrow">Dein Smartphone. Deine Daten.</span>
           <h2 id="privacy-title" data-i18n="privacyTitle">Mehr Übersicht.<br>Nicht mehr Überwachung.</h2>
           <p data-i18n="privacyIntro">Slothie soll dir den Alltag erleichtern – und dich selbst entscheiden lassen. Die App ist als normale Android-App gedacht: Du kannst jederzeit andere Apps und die gewohnte Bedienung deines Smartphones nutzen.</p>
           <ul class="privacy-list">
-            <li data-i18n="privacyPoint1">Kein Benutzerkonto und kein eigener Slothie-Server laut aktuellem Konzept.</li>
-            <li data-i18n="privacyPoint2">Kontakte, gespeicherte Orte und Einstellungen bleiben lokal auf deinem Gerät.</li>
-            <li data-i18n="privacyPoint3">Standortfreigabe nur nach deiner ausdrücklichen Aktion; kein Standortverlauf durch Slothie.</li>
-            <li data-i18n="privacyPoint4">Berechtigungen entscheidest du selbst und kannst sie in Android jederzeit ändern.</li>
+            <li><span class="privacy-check" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5" /></svg></span><span data-i18n="privacyPoint1">Kein Benutzerkonto und kein eigener Slothie-Server laut aktuellem Konzept.</span></li>
+            <li><span class="privacy-check" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5" /></svg></span><span data-i18n="privacyPoint2">Kontakte, gespeicherte Orte und Einstellungen bleiben lokal auf deinem Gerät.</span></li>
+            <li><span class="privacy-check" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5" /></svg></span><span data-i18n="privacyPoint3">Standortfreigabe nur nach deiner ausdrücklichen Aktion; kein Standortverlauf durch Slothie.</span></li>
+            <li><span class="privacy-check" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5" /></svg></span><span data-i18n="privacyPoint4">Berechtigungen entscheidest du selbst und kannst sie in Android jederzeit ändern.</span></li>
           </ul>
           <p class="privacy-note" data-i18n="privacyNote">Transparenz-Hinweis: Wetterabfragen nutzen Open-Meteo; bei Navigation und externen Nachrichten-Apps gelten zusätzlich deren Datenschutzregeln. Details werden vor Veröffentlichung überprüft und ergänzt.</p>
         </div>
@@ -527,6 +542,7 @@
       <nav class="footer-links" aria-label="Rechtliches">
         <a href="impressum.html" data-i18n="footerImprint">Impressum</a>
         <a href="datenschutz.html" data-i18n="footerPrivacy">Datenschutz</a>
+        <a href="LUCIDE-LICENSE.txt" data-i18n="footerIconLicense">Icon-Lizenz</a>
       </nav>
     </div>
   </footer>
@@ -553,9 +569,9 @@
         mockContactSub: "Zuletzt hinzugefügt",
         mockWeatherCity: "Heute in deiner Nähe",
         mockWeather: "Leicht bewölkt",
-        mockTabContacts: "♡ Kontakte",
-        mockTabMap: "⌖ Karte",
-        mockTabHelp: "? Hilfe",
+        mockTabContacts: "Kontakte",
+        mockTabMap: "Karte",
+        mockTabHelp: "Hilfe",
         floatNote: "Deine Kontakte.<br>Deine Entscheidung.",
         trust1: "Für Erwachsene gemacht",
         trust2: "Du behältst die Kontrolle",
@@ -590,7 +606,8 @@
         footerCopy: "Mit Ruhe gestaltet. Mit dir im Mittelpunkt.",
         footerStatus: "Android-App in Entwicklung",
         footerImprint: "Impressum",
-        footerPrivacy: "Datenschutz"
+        footerPrivacy: "Datenschutz",
+        footerIconLicense: "Icon-Lizenz"
       },
       en: {
         brandAria: "Slothie home",
@@ -612,9 +629,9 @@
         mockContactSub: "Recently added",
         mockWeatherCity: "Today near you",
         mockWeather: "Partly cloudy",
-        mockTabContacts: "♡ People",
-        mockTabMap: "⌖ Map",
-        mockTabHelp: "? Help",
+        mockTabContacts: "People",
+        mockTabMap: "Map",
+        mockTabHelp: "Help",
         floatNote: "Your contacts.<br>Your choice.",
         trust1: "Made for adults",
         trust2: "You stay in control",
@@ -649,7 +666,8 @@
         footerCopy: "Made with care. With you in mind.",
         footerStatus: "Android app in development",
         footerImprint: "Legal notice",
-        footerPrivacy: "Privacy policy"
+        footerPrivacy: "Privacy policy",
+        footerIconLicense: "Icon license"
       }
     };
 
